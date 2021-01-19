@@ -73,7 +73,7 @@ module.exports = class JiraSprint extends BaseJsonService {
       color = 'brightgreen'
     }
     return {
-      label: 'completion',
+      label: 'sprint completion',
       message: `${percentComplete.toFixed(0)}%`,
       color,
     }
@@ -89,7 +89,7 @@ module.exports = class JiraSprint extends BaseJsonService {
         schema,
         options: {
           qs: {
-            jql: `sprint=${sprintId} AND type IN (Bug,Improvement,Story,"Technical task")`,
+            jql: `sprint=${sprintId} AND type IN (Bug,Story,"Technical task")`,
             fields: 'resolution',
             maxResults: 500,
           },
