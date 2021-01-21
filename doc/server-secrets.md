@@ -102,7 +102,7 @@ self-hosted Shields installation access to private repositories hosted on bitbuc
 - `BITBUCKET_SERVER_USER` (yml: `private.bitbucket_server_username`)
 - `BITBUCKET_SERVER_PASS` (yml: `private.bitbucket_server_password`)
 
-Bitbucket badges use basic auth. Provide a username and password to give your
+Bitbucket badges use basic auth. Provide a username [Generate an personal access token](https://confluence.atlassian.com/bitbucketserver072/personal-access-tokens-1005335924.html#Personalaccesstokens-Generatingpersonalaccesstokens) to give your
 self-hosted Shields installation access to a private Bitbucket Server instance.
 
 ### Discord
