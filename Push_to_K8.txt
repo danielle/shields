@@ -1,0 +1,62 @@
+--Build Docker Image:
+docker build -t shields:1.13 .
+
+--Update the Image in Artifactory
+docker tag shields:1.13 artifactory.trinet-devops.com:8443/shields:1.13
+
+--Push Docker Image to Artifactory (Increment the Image/Version number - last value on the end)
+docker push artifactory.trinet-devops.com:8443/shields:1.13
+
+--View Images
+docker images
+
+--Install Kubernetes if not already installed.  If installed, configure to our Server instance if not already done so.
+
+
+--Follow commands in the Kubernetes namespace:
+--Note that the commands for for Linux/Mac OS.  If you are on a Windows machine, you will need to remove the "\" from each line and move each command to a single line.  Everything from "kubectl" command until the next "kubectl" should be on a single line and executed in Powershell.
+
+
+--Deploy new Shields.yaml configuration file:
+kubectl apply -f shields.yaml
+
+
+
+kubectl config set-credentials "Danielle.Derby@trinet.com" --auth-provider=azure --auth-provider-arg=environment=AzurePublicCloud --auth-provider-arg=client-id=5fa4197e-6279-481b-8fa3-38e4bfeb1ecd --auth-provider-arg=tenant-id=67b039ac-f578-42c6-9b5b-aa1b5bb0388f --auth-provider-arg=apiserver-id=015e884f-3108-40a0-9b7d-8f2fb2c227da
+
+kubectl config set-cluster huos1_k8s_pilot --insecure-skip-tls-verify=true --server='https://api.eng.houston.trinet-k8s.com:7443'
+
+kubectl config set-context shields_huos1_k8s_pilot --cluster='huos1_k8s_pilot' --namespace='shields' --user='Danielle.Derby@trinet.com'
+
+kubectl config use-context shields_huos1_k8s_pilot
+
+kubectl get pods
+
+
+
+
+
+
+
+
+--If Kubernetes isn't installed, instructions to install for Windows:
+--Link to download: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+
+--Install commands for Powershell:
+Install-Script -Name 'install-kubectl' -Scope CurrentUser -Force
+
+install-kubectl.ps1
+
+--Verify Install
+kubectl version --client
+
+
+--Configurare Kubernetes to insternal Kubernetes Server: 
+kubectl config set-cluster huos1_k8s_pilot \
+
+
+
+
+
+--Restart Kubernetes Pod(s)
+kubectl rollout restart deployment shields-deployment

@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shields-deployment
+  labels:
+    app: shields
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: shields
+  template:
+    metadata:
+      labels:
+        app: shields
+    spec:
+      containers:
+        - name: shields
+          image: artifactory.trinet-devops.com:8443/shields:1.12
+          ports:
+            - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: shields-svc-demo
+  labels:
+    app: shields
+    created-by: 'Danielle'
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: shields
+
+  type: ClusterIP
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: shields-ing-demo
+  labels:
+    app: shields
+    created-by: 'Danielle'
+spec:
+  tls:
+    - hosts:
+        - shields.eng.houston.trinet-k8s.com
+  rules:
+    - host: shields.eng.houston.trinet-k8s.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: shields-svc
+              servicePort: 80
