@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: shields
-          image: artifactory.trinet-devops.com:8443/shields:1.12
+          image: artifactory.trinet-devops.com:8443/shields:1.14
           ports:
             - containerPort: 80
 ---

@@ -1,11 +1,11 @@
 --Build Docker Image:
-docker build -t shields:1.13 .
+docker build -t shields:1.14 .
 
 --Update the Image in Artifactory
-docker tag shields:1.13 artifactory.trinet-devops.com:8443/shields:1.13
+docker tag shields:1.14 artifactory.trinet-devops.com:8443/shields:1.14
 
 --Push Docker Image to Artifactory (Increment the Image/Version number - last value on the end)
-docker push artifactory.trinet-devops.com:8443/shields:1.13
+docker push artifactory.trinet-devops.com:8443/shields:1.14
 
 --View Images
 docker images

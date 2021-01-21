@@ -71,7 +71,7 @@ module.exports = class SonarBase extends BaseJsonService {
       schema = modernSchema
       url = `${server}/api/measures/component`
       qs = {
-        componentKey: component,
+        component: component,
         metricKeys: metricName,
       }
     }
